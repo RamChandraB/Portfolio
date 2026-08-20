@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Shell</title>
+	<meta name="aspect-ratio" content="16/10">
+	<meta name="theme-color" content="#0d0d0d">
+	<meta name="capabilities" content="PortfolioShell">
+	<meta name="permissions" content="unsandboxed">
+	<meta name="nova-include" content="nova.css">
+	<meta name="nova-icon"
+		content="<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' width='48' height='48'><rect width='48' height='48' rx='11' fill='#0d0d0d'/><rect x='6.5' y='11' width='35' height='26' rx='4' fill='#171717' stroke='#96ea6e' stroke-width='2'/><path d='M13.5 19.5l5 4.5-5 4.5' stroke='#96ea6e' stroke-width='2.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/><rect x='22.5' y='26.6' width='12' height='2.8' rx='1.4' fill='#ffffff'/></svg>">
+	<style>
+		html {
+			height: 100%;
+		}
+
+		body {
+			margin: 0;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			background: #0b0b0b;
+			color: #e4e4e4;
+			font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Courier New', monospace;
+			font-size: 13.5px;
+			line-height: 1.65;
+			user-select: text;
+		}
+
+		#screen {
+			flex: 1;
+			overflow-y: auto;
+			padding: 1rem 1.1rem 0.5rem;
+			white-space: pre-wrap;
+			word-break: break-word;
+		}
+
+		.line {
+			margin: 0;
+		}
+
+		.cmdecho {
+			color: #e4e4e4;
+		}
+
+		.cmdecho .prompt {
+			color: #96ea6e;
+		}
+
+		.cmdecho .path {
+			color: #6179FF;
+		}
+
+		.out {
+			color: #c2c2c2;
+		}
+
+		.err {
+			color: #ff8080;
+		}
+
+		.hd {
+			color: #96ea6e;
+			font-weight: 700;
+		}
+
+		.key {
+			color: #a3b1ff;
+		}
+
+		.dim {
+			color: #7a7a7a;
+		}
+
+		.acc {
+			color: #ffd479;
+		}
+
+		a.cmdlink {
+			color: #a3b1ff;
+			cursor: pointer;
+			text-decoration: none;
+			border-bottom: 1px dotted #a3b1ff66;
+		}
+
+		a.cmdlink:hover {
+			color: #fff;
+			border-bottom-color: #fff;
+		}
+
+		/* input row */
+		#inputrow {
+			flex: 0 0 auto;
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
+			padding: 0.6rem 1.1rem 0.9rem;
+			border-top: 1px solid #ffffff0f;
+		}
+
+		#prompt {
+			flex: 0 0 auto;
+			color: #96ea6e;
+			white-space: nowrap;
+		}
+
+		#prompt .path {
+			color: #6179FF;
+		}
+
+		#cmd {
+			flex: 1;
+			background: transparent;
+			border: 0;
+			outline: 0;
+			color: #e4e4e4;
+			font-family: inherit;
+			font-size: inherit;
+			caret-color: #96ea6e;
+		}
+
+		::-webkit-scrollbar {
+			width: 8px;
+		}
+
+		::-webkit-scrollbar-thumb {
+			background: #2a2a2a;
+			border-radius: 4px;
+			border: 0;
+		}
+
+		::-webkit-scrollbar-track {
+			background: transparent;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="screen"></div>
+	<div id="inputrow">
+		<span id="prompt">ram@novaos:<span class="path">~</span>$</span>
+		<input id="cmd" autocomplete="off" spellcheck="false" autofocus>
+	</div>
+
+	<script>
+		const screenEl = document.getElementById('screen');
+		const cmdEl = document.getElementById('cmd');
+
+		const DATA = {
+			name: 'Ram Chandra Beniwal',
+			title: 'AI/ML Lead | LLM & Agentic Systems Engineer | Senior Unity3D/XR Developer',
+			email: 'ramchandra.nitsri@gmail.com',
+			phone: '+91-8290637199',
+			linkedin: 'https://www.linkedin.com/in/ramchandra95',
+			education: 'B.Tech, Chemical Engineering — National Institute of Technology, Srinagar (2014–2018), CGPA 7.41',
+			summary: 'AI/ML Lead with 4+ years building and shipping production LLM systems: multimodal RAG pipelines,\nagentic orchestration, multi-agent systems, and knowledge-graph-powered retrieval. Currently leading a\nfull AI engineering team at Futureverse, owning architecture from ingestion and hybrid retrieval\n(BM25 + vector) through reranking, evaluation, and deployment.',
+			skills: {
+				'llm': ['RAG', 'Multimodal RAG', 'GraphRAG', 'Agentic Orchestration', 'Multi-Agent Systems', 'AI Agents', 'Tool Use / Function Calling', 'Prompt Engineering'],
+				'retrieval': ['Hybrid BM25 + Vector Search', 'Semantic Retrieval', 'Multi-Query Expansion', 'Cross-Encoder Reranking', 'Relevance Thresholding', 'Chunking Strategies', 'Embedding Pipelines (bge-m3)'],
+				'graphs': ['Neo4j', 'AutoSchema Extraction', 'Hybrid Vector + Graph Search'],
+				'frameworks': ['LangChain', 'PyTorch', 'Hugging Face Transformers', 'OpenAI API', 'Vision LLMs'],
+				'eval': ['RAG Eval Suites', 'Faithfulness', 'Completeness', 'Citation Accuracy', 'Hallucination Mitigation', 'Production Debugging'],
+				'databases': ['Weaviate', 'Pinecone', 'FAISS', 'Neo4j', 'SQL/MySQL'],
+				'languages': ['Python', 'C# (Advanced)', 'C++', 'JavaScript (ES6+)', 'SQL'],
+				'xr': ['Unity3D (4+ years)', 'OpenXR', 'MRTK', 'XR Interaction Toolkit', 'ARCore', 'WebGL/Three.js'],
+				'cloud': ['Docker', 'AWS (EC2, S3, Lambda)', 'CI/CD', 'Git', 'Linux', 'REST APIs']
+			},
+			jobs: [
+				{
+					role: 'AI/ML Lead', org: 'Futureverse Private Limited', when: 'Feb 2026 – Present', bullets: [
+						'Lead the AI engineering team end-to-end: architecture, sprint planning, code reviews, mentoring.',
+						'Designed agentic orchestration and multi-agent workflows coordinating specialised LLM agents.',
+						'Built a multimodal RAG pipeline: heading-based chunking, hybrid BM25 + vector (Weaviate, bge-m3),',
+						'  and vision-LLM image captioning embedded in the same vector space as text.',
+						'Fused document context into image embeddings; LLM-based decorative-image filtering.',
+						'Multi-query expansion + cross-encoder reranking + relevance thresholds to kill hallucinated cites.',
+						'Auto-rendered inline citations, backed by a RAG eval suite (faithfulness/completeness/citations).',
+						'Fixed a critical vector-DB schema bug causing silent retrieval failures.'
+					]
+				},
+				{
+					role: 'Team Lead – Unity, XR & AI/LLM Development', org: 'Metamix Technologies', when: 'Jun 2023 – Feb 2026', bullets: [
+						'Led Unity + AI development for medical XR products: AnatomyXR, Medvisor, BirthXR, LivXR.',
+						'Built RAG and GraphRAG pipelines (OpenAI API, LangChain, Neo4j) for medical knowledge retrieval.',
+						'Developed an LLM-based question and quiz generator for AnatomyXR.',
+						'Implemented AutoSchema Extraction to generate Neo4j schemas from unstructured medical content.',
+						'Designed modular Unity architecture; built client-server multi-user XR applications.',
+						'Optimised for Windows desktop, mobile, and XR devices; integrated backend SQL systems.'
+					]
+				},
+				{
+					role: 'Unity Game & Web Developer', org: 'Parcellinc', when: 'Jan 2022 – Jun 2023', bullets: [
+						'Developed Unity games (Zombie Runner, Realm Rush) with AI-driven gameplay mechanics.',
+						'Implemented AI behaviour trees for enemy NPC logic and adaptive difficulty.',
+						'Built WebGL and Three.js interactive 3D web experiences; cross-platform Android apps.',
+						'Improved performance and optimised rendering pipelines in agile cycles.'
+					]
+				}
+			],
+			projects: [
+				{ name: 'Multimodal Enterprise RAG Platform', org: 'Futureverse', desc: 'Unified text + image search in one vector space, hybrid BM25 + vector retrieval, cross-encoder\nreranking, inline cited answers, full eval suite, orchestrated via a multi-agent pipeline.' },
+				{ name: 'AnatomyXR', org: 'Meta Quest', desc: 'Layered organ interaction and gesture-based XR modules; RAG + Neo4j knowledge graph for anatomy\nQ&A and an automatic quiz generator inside the XR environment.' },
+				{ name: 'Medical Knowledge Graph System', org: 'AutoSchema & Semantic Retrieval', desc: 'AutoSchema Extraction pipeline structuring unstructured clinical documents into Neo4j graphs,\nenabling hybrid vector + graph retrieval.' },
+				{ name: 'Medvisor', org: 'Mixed Reality Surgical AI', desc: 'MR surgical visualisation and contextual simulation workflows validated with medical professionals.' }
+			]
+		};
+
+		/* ---------- output helpers ---------- */
+		function esc(text) {
+			return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+		}
+
+		function write(html, cls) {
+			const p = document.createElement('div');
+			p.className = 'line ' + (cls || 'out');
+			p.innerHTML = html;
+			screenEl.appendChild(p);
+		}
+
+		function writeText(text, cls) {
+			write(esc(text), cls);
+		}
+
+		function blank() {
+			write('&nbsp;');
+		}
+
+		function link(cmd, label) {
+			return '<a class="cmdlink" data-cmd="' + esc(cmd) + '">' + esc(label || cmd) + '</a>';
+		}
+
+		function scrollDown() {
+			screenEl.scrollTop = screenEl.scrollHeight;
+		}
+
+		/* ---------- commands ---------- */
+		const COMMANDS = {
+			help() {
+				write('<span class="hd">Available commands</span>');
+				const rows = [
+					['whoami', 'who I am, in one line'],
+					['about', 'professional summary'],
+					['experience', 'full work history'],
+					['projects', 'key projects'],
+					['skills [group]', 'technical skills — try: skills retrieval'],
+					['stack', 'the tools I reach for most'],
+					['education', 'degree and institution'],
+					['contact', 'email, phone, LinkedIn'],
+					['resume', 'open the Resume app'],
+					['open <app>', 'launch a NovaOS app by name'],
+					['ls', 'list what is in here'],
+					['neofetch', 'system + profile summary'],
+					['history', 'commands you have run'],
+					['clear', 'clear the screen'],
+					['help', 'this list']
+				];
+				rows.forEach(([c, d]) => {
+					write('  ' + link(c.split(' ')[0], c).padEnd(0) + '<span class="dim">' +
+						' '.repeat(Math.max(2, 18 - c.length)) + esc(d) + '</span>');
+				});
+				blank();
+				write('<span class="dim">Tab completes commands. Up/Down walks history.</span>');
+			},
+
+			whoami() {
+				writeText(DATA.name);
+				write('<span class="key">' + esc(DATA.title) + '</span>');
+			},
+
+			about() {
+				write('<span class="hd">Professional Summary</span>');
+				writeText(DATA.summary);
+				blank();
+				write('<span class="dim">More: ' + link('experience') + ' &middot; ' + link('projects') + ' &middot; ' + link('skills') + '</span>');
+			},
+
+			summary() { COMMANDS.about(); },
+
+			experience() {
+				write('<span class="hd">Professional Experience</span>');
+				DATA.jobs.forEach((job, i) => {
+					if (i) blank();
+					write('<span class="acc">' + esc(job.role) + '</span> <span class="dim">@</span> <span class="key">' + esc(job.org) + '</span>');
+					write('<span class="dim">' + esc(job.when) + '</span>');
+					job.bullets.forEach(b => writeText('  • ' + b));
+				});
+			},
+
+			projects() {
+				write('<span class="hd">Key Projects</span>');
+				DATA.projects.forEach((p, i) => {
+					if (i) blank();
+					write('<span class="acc">' + esc(p.name) + '</span> <span class="dim">— ' + esc(p.org) + '</span>');
+					writeText('  ' + p.desc.split('\n').join('\n  '));
+				});
+			},
+
+			skills(args) {
+				const groups = DATA.skills;
+				const labels = {
+					llm: 'LLM & Agentic Systems', retrieval: 'Retrieval & Search', graphs: 'Knowledge Graphs',
+					frameworks: 'AI Frameworks & APIs', eval: 'Evaluation & Reliability', databases: 'Databases',
+					languages: 'Programming', xr: '3D / XR', cloud: 'Cloud & DevOps'
+				};
+
+				const want = (args[0] || '').toLowerCase();
+				if (want) {
+					const key = Object.keys(groups).find(k => k === want || labels[k].toLowerCase().includes(want));
+					if (!key) {
+						write('<span class="err">No skill group "' + esc(want) + '".</span>');
+						write('<span class="dim">Groups: ' + Object.keys(groups).map(k => link('skills ' + k, k)).join(', ') + '</span>');
+						return;
+					}
+					write('<span class="hd">' + esc(labels[key]) + '</span>');
+					groups[key].forEach(s => writeText('  • ' + s));
+					return;
+				}
+
+				write('<span class="hd">Core Technical Skills</span>');
+				Object.keys(groups).forEach(k => {
+					write('  <span class="key">' + esc(labels[k]) + '</span>');
+					writeText('    ' + groups[k].join(', '));
+				});
+				blank();
+				write('<span class="dim">Narrow it down: ' + Object.keys(groups).map(k => link('skills ' + k, k)).join(' ') + '</span>');
+			},
+
+			stack() {
+				write('<span class="hd">Daily drivers</span>');
+				const stack = [
+					['Retrieval', 'Weaviate, bge-m3, BM25, cross-encoder rerankers'],
+					['Orchestration', 'LangChain, OpenAI API, multi-agent pipelines'],
+					['Graphs', 'Neo4j, AutoSchema extraction'],
+					['Languages', 'Python, C#, JavaScript, SQL'],
+					['Realtime 3D', 'Unity3D, OpenXR, Three.js'],
+					['Ship it', 'Docker, AWS, CI/CD, Linux']
+				];
+				stack.forEach(([k, v]) => {
+					write('  <span class="key">' + esc(k) + '</span>' + ' '.repeat(Math.max(2, 15 - k.length)) + '<span class="out">' + esc(v) + '</span>');
+				});
+			},
+
+			education() {
+				write('<span class="hd">Education</span>');
+				writeText('  ' + DATA.education);
+			},
+
+			contact() {
+				write('<span class="hd">Contact</span>');
+				write('  <span class="key">email</span>     <a class="cmdlink" href="mailto:' + DATA.email + '">' + esc(DATA.email) + '</a>');
+				write('  <span class="key">phone</span>     ' + esc(DATA.phone));
+				write('  <span class="key">linkedin</span>  <a class="cmdlink" href="' + DATA.linkedin + '" target="_blank" rel="noopener">' + esc(DATA.linkedin) + '</a>');
+				blank();
+				write('<span class="dim">Or open the ' + link('open contact', 'Contact app') + '.</span>');
+			},
+
+			resume() {
+				write('<span class="out">Opening Resume…</span>');
+				launchApp('Resume');
+			},
+
+			async open(args) {
+				const name = (args[0] || '').trim();
+				if (!name) {
+					write('<span class="err">Usage: open &lt;app&gt;</span>');
+					write('<span class="dim">e.g. ' + link('open projects') + ', ' + link('open settings') + ', ' + link('open files') + '</span>');
+					return;
+				}
+				const pretty = name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+				const ok = await launchApp(pretty);
+				if (ok) write('<span class="out">Opening ' + esc(pretty) + '…</span>');
+				else write('<span class="err">No app named "' + esc(pretty) + '".</span>');
+			},
+
+			ls() {
+				const items = ['about', 'experience', 'projects', 'skills', 'education', 'contact', 'resume', 'stack'];
+				write(items.map(i => link(i)).join('   '));
+			},
+
+			neofetch() {
+				const logo = [
+					'      /\\      ',
+					'     /  \\     ',
+					'    / /\\ \\    ',
+					'   / /  \\ \\   ',
+					'  / /____\\ \\  ',
+					' /_/      \\_\\ '
+				];
+				const info = [
+					['ram@novaos', ''],
+					['———————————', ''],
+					['Name', DATA.name],
+					['Role', 'AI/ML Lead @ Futureverse'],
+					['Focus', 'RAG · Agentic Systems · Knowledge Graphs'],
+					['Experience', '4+ years'],
+					['Languages', 'Python, C#, C++, JavaScript, SQL'],
+					['Databases', 'Weaviate, Pinecone, FAISS, Neo4j'],
+					['Also', 'Unity3D / OpenXR'],
+					['Education', 'B.Tech, NIT Srinagar'],
+					['Contact', DATA.email]
+				];
+				const rows = Math.max(logo.length, info.length);
+				for (let i = 0; i < rows; i++) {
+					const l = logo[i] !== undefined ? logo[i] : ' '.repeat(14);
+					const pair = info[i];
+					let right = '';
+					if (pair) {
+						right = pair[1]
+							? '<span class="key">' + esc(pair[0]) + '</span><span class="dim">: </span>' + esc(pair[1])
+							: '<span class="hd">' + esc(pair[0]) + '</span>';
+					}
+					write('<span class="hd">' + esc(l) + '</span>' + right);
+				}
+			},
+
+			history() {
+				if (!history.length) {
+					write('<span class="dim">Nothing yet.</span>');
+					return;
+				}
+				history.forEach((h, i) => write('  <span class="dim">' + String(i + 1).padStart(3) + '</span>  ' + esc(h)));
+			},
+
+			clear() {
+				screenEl.innerHTML = '';
+			},
+
+			sudo(args) {
+				if (!args.length) {
+					write('<span class="err">usage: sudo &lt;command&gt;</span>');
+					return;
+				}
+				write('<span class="err">ram is not in the sudoers file. This incident has been reported.</span>');
+				write('<span class="dim">(to my knowledge graph, naturally)</span>');
+			},
+
+			exit() {
+				write('<span class="dim">Closing…</span>');
+				setTimeout(() => {
+					try { myWindow.close(); } catch (err) { }
+				}, 350);
+			}
+		};
+
+		const ALIASES = {
+			'?': 'help', 'man': 'help', 'cv': 'resume', 'work': 'experience', 'jobs': 'experience',
+			'me': 'whoami', 'info': 'about', 'edu': 'education', 'mail': 'contact', 'email': 'contact',
+			'cls': 'clear', 'quit': 'exit', 'tech': 'stack'
+		};
+
+		/* ---------- app launching ---------- */
+		async function launchApp(name) {
+			try {
+				const file = await window.parent.getFileByPath('Apps/' + name + '.app');
+				if (file && file.id) {
+					window.parent.openfile(file.id);
+					return true;
+				}
+			} catch (err) { }
+			return false;
+		}
+
+		/* ---------- REPL ---------- */
+		const history = [];
+		let historyIndex = -1;
+
+		function echo(raw) {
+			write('<span class="prompt">ram@novaos:</span><span class="path">~</span><span class="prompt">$</span> ' + esc(raw), 'cmdecho');
+		}
+
+		async function run(raw) {
+			const input = raw.trim();
+			echo(input);
+			if (!input) return;
+
+			history.push(input);
+			historyIndex = history.length;
+
+			const parts = input.split(/\s+/);
+			let name = parts[0].toLowerCase();
+			const args = parts.slice(1);
+
+			if (ALIASES[name]) name = ALIASES[name];
+
+			const fn = COMMANDS[name];
+			if (!fn) {
+				write('<span class="err">' + esc(name) + ': command not found</span>');
+				write('<span class="dim">Try ' + link('help') + '.</span>');
+				return;
+			}
+
+			try {
+				await fn(args);
+			} catch (err) {
+				write('<span class="err">Error: ' + esc(err && err.message ? err.message : err) + '</span>');
+			}
+		}
+
+		cmdEl.addEventListener('keydown', async e => {
+			if (e.key === 'Enter') {
+				e.preventDefault();
+				const value = cmdEl.value;
+				cmdEl.value = '';
+				await run(value);
+				blank();
+				scrollDown();
+				return;
+			}
+
+			if (e.key === 'ArrowUp') {
+				e.preventDefault();
+				if (!history.length) return;
+				historyIndex = Math.max(0, historyIndex - 1);
+				cmdEl.value = history[historyIndex] || '';
+				return;
+			}
+
+			if (e.key === 'ArrowDown') {
+				e.preventDefault();
+				if (!history.length) return;
+				historyIndex = Math.min(history.length, historyIndex + 1);
+				cmdEl.value = history[historyIndex] || '';
+				return;
+			}
+
+			if (e.key === 'Tab') {
+				e.preventDefault();
+				const partial = cmdEl.value.trim().toLowerCase();
+				if (!partial || partial.includes(' ')) return;
+				const pool = Object.keys(COMMANDS).concat(Object.keys(ALIASES));
+				const hits = pool.filter(c => c.startsWith(partial));
+				if (hits.length === 1) {
+					cmdEl.value = hits[0] + ' ';
+				} else if (hits.length > 1) {
+					echo(cmdEl.value);
+					write(hits.map(h => link(h)).join('   '));
+					blank();
+					scrollDown();
+				}
+				return;
+			}
+
+			if (e.key === 'l' && e.ctrlKey) {
+				e.preventDefault();
+				COMMANDS.clear();
+			}
+		});
+
+		screenEl.addEventListener('click', async e => {
+			const target = e.target.closest('a.cmdlink');
+			if (!target || !target.dataset.cmd) return;
+			e.preventDefault();
+			await run(target.dataset.cmd);
+			blank();
+			scrollDown();
+			cmdEl.focus();
+		});
+
+		document.body.addEventListener('mousedown', e => {
+			if (window.getSelection().toString()) return;
+			if (e.target.closest('a')) return;
+			setTimeout(() => cmdEl.focus(), 0);
+		});
+
+		/* ---------- banner ---------- */
+		write('<span class="hd">nova-shell</span> <span class="dim">— Ram Chandra Beniwal · AI/ML Lead</span>');
+		write('<span class="dim">Type ' + link('help') + ' for commands, or jump straight to ' +
+			link('about') + ' · ' + link('experience') + ' · ' + link('projects') + ' · ' + link('skills') + '.</span>');
+		blank();
+		cmdEl.focus();
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,18 @@
+# OS noise
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+
+# Editor / tooling
+.vscode/
+.idea/
+*.swp
+
+# Local scratch: headless screenshots and probe pages used while developing
+_*.html
+v[0-9]-*.png
+
+# Python static server artefacts
+__pycache__/
+*.pyc

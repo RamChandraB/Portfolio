@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Contact</title>
+	<meta name="aspect-ratio" content="10/11">
+	<meta name="theme-color" content="#101010">
+	<meta name="capabilities" content="PortfolioContact">
+	<meta name="permissions" content="unsandboxed">
+	<meta name="nova-include" content="nova.css material-symbols-rounded">
+	<meta name="nova-icon"
+		content="<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' width='48' height='48'><rect width='48' height='48' rx='11' fill='#6179FF'/><rect x='8' y='14' width='32' height='21' rx='4' fill='#ffffff'/><path d='M11 18l13 9 13-9' stroke='#6179FF' stroke-width='3.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+	<style>
+		html {
+			height: 100%;
+		}
+
+		body {
+			margin: 0;
+			height: 100%;
+			overflow-y: auto;
+			background: var(--col-bg1);
+			color: var(--col-txt1);
+			font-family: 'Poppins', sans-serif;
+			font-size: 15px;
+			line-height: 1.6;
+		}
+
+		main {
+			max-width: 520px;
+			margin: 0 auto;
+			padding: 1.9rem 1.4rem 2.5rem;
+		}
+
+		.top {
+			text-align: center;
+			margin-bottom: 1.7rem;
+		}
+
+		.avatar {
+			width: 78px;
+			height: 78px;
+			margin: 0 auto 0.85rem;
+			border-radius: 22px;
+			background: linear-gradient(140deg, #6179FF, #3a48a8 60%, #96ea6e);
+			display: grid;
+			place-items: center;
+			font-size: 1.7rem;
+			font-weight: 800;
+			box-shadow: 0 8px 24px #6179ff40;
+		}
+
+		.top h1 {
+			margin: 0;
+			font-size: 1.35rem;
+			font-weight: 800;
+		}
+
+		.top p {
+			margin: 0.25rem 0 0;
+			font-size: 0.83rem;
+			color: #a3b1ff;
+			font-weight: 300;
+		}
+
+		.status {
+			display: inline-flex;
+			align-items: center;
+			gap: 0.4rem;
+			margin-top: 0.8rem;
+			font-size: 0.76rem;
+			padding: 0.25rem 0.7rem;
+			border-radius: 999px;
+			background: #96ea6e1a;
+			border: 1px solid #96ea6e40;
+			color: #96ea6e;
+		}
+
+		.dot {
+			width: 7px;
+			height: 7px;
+			border-radius: 50%;
+			background: #96ea6e;
+			box-shadow: 0 0 0 3px #96ea6e33;
+		}
+
+		/* rows */
+		.row {
+			display: flex;
+			align-items: center;
+			gap: 0.8rem;
+			background: var(--col-bg2);
+			border: var(--box-crisp);
+			border-radius: var(--siz-radius1);
+			padding: 0.8rem 0.9rem;
+			margin-bottom: 0.6rem;
+			transition: border-color var(--time1);
+		}
+
+		.row:hover {
+			border-color: #6179ff59;
+		}
+
+		.rowicon {
+			flex: 0 0 auto;
+			width: 38px;
+			height: 38px;
+			border-radius: var(--siz-radius2);
+			display: grid;
+			place-items: center;
+			background: var(--col-bg3);
+			border: var(--box-crisp);
+		}
+
+		.rowicon .material-symbols-rounded {
+			font-size: 1.2rem;
+			color: #a3b1ff;
+		}
+
+		.rowbody {
+			flex: 1;
+			min-width: 0;
+		}
+
+		.rowlabel {
+			font-size: 0.7rem;
+			text-transform: uppercase;
+			letter-spacing: 0.1em;
+			color: #8a8a8a;
+			font-weight: 800;
+		}
+
+		.rowvalue {
+			font-size: 0.87rem;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+
+		.rowvalue a {
+			color: var(--col-txt1);
+			text-decoration: none;
+		}
+
+		.rowvalue a:hover {
+			color: #a3b1ff;
+			text-decoration: underline;
+		}
+
+		.rowbtns {
+			display: flex;
+			gap: 0.3rem;
+			flex: 0 0 auto;
+		}
+
+		.iconbtn {
+			background: transparent;
+			border: var(--box-crisp);
+			border-radius: var(--siz-radius3);
+			color: #b4b4b4;
+			width: 30px;
+			height: 30px;
+			display: grid;
+			place-items: center;
+			transition: background var(--time1), color var(--time1);
+		}
+
+		.iconbtn:hover {
+			background: var(--col-bgh);
+			color: var(--col-txt1);
+		}
+
+		.iconbtn .material-symbols-rounded {
+			font-size: 1rem;
+		}
+
+		.iconbtn.done {
+			color: #96ea6e;
+			border-color: #96ea6e59;
+		}
+
+		/* footer note */
+		.note {
+			margin-top: 1.5rem;
+			background: var(--col-bg2);
+			border: var(--box-crisp);
+			border-left: 3px solid #96ea6e;
+			border-radius: var(--siz-radius2);
+			padding: 0.85rem 1rem;
+			font-size: 0.83rem;
+			color: #b4b4b4;
+			font-weight: 300;
+		}
+
+		.note b {
+			color: var(--col-txt1);
+			font-weight: 800;
+		}
+
+		.cta {
+			margin-top: 1rem;
+			display: flex;
+			gap: 0.5rem;
+			flex-wrap: wrap;
+		}
+
+		.cta button {
+			flex: 1;
+			min-width: 150px;
+			background: var(--col-bg3);
+			color: var(--col-txt1);
+			border: var(--box-crisp);
+			border-radius: var(--siz-radius2);
+			padding: 0.6rem 0.9rem;
+			font-size: 0.85rem;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			gap: 0.4rem;
+			transition: background var(--time1), transform var(--time1);
+		}
+
+		.cta button:hover {
+			background: var(--col-bgh);
+			transform: translateY(-1px);
+		}
+
+		.cta button.primary {
+			background: #6179FF;
+			border-color: #6179FF;
+		}
+
+		.cta button.primary:hover {
+			background: #7286ff;
+		}
+
+		.cta button .material-symbols-rounded {
+			font-size: 1.05rem;
+		}
+	</style>
+</head>
+
+<body>
+	<main>
+		<div class="top">
+			<div class="avatar">RC</div>
+			<h1>Ram Chandra Beniwal</h1>
+			<p>AI/ML Lead &bull; LLM &amp; Agentic Systems Engineer</p>
+			<div class="status"><span class="dot"></span>Open to conversations about RAG &amp; agentic systems</div>
+		</div>
+
+		<div class="row">
+			<div class="rowicon"><span class="material-symbols-rounded">mail</span></div>
+			<div class="rowbody">
+				<div class="rowlabel">Email</div>
+				<div class="rowvalue"><a href="mailto:ramchandra.nitsri@gmail.com">ramchandra.nitsri@gmail.com</a></div>
+			</div>
+			<div class="rowbtns">
+				<button class="iconbtn" title="Copy email" data-copy="ramchandra.nitsri@gmail.com"><span
+						class="material-symbols-rounded">content_copy</span></button>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="rowicon"><span class="material-symbols-rounded">call</span></div>
+			<div class="rowbody">
+				<div class="rowlabel">Phone</div>
+				<div class="rowvalue"><a href="tel:+918290637199">+91-8290637199</a></div>
+			</div>
+			<div class="rowbtns">
+				<button class="iconbtn" title="Copy phone number" data-copy="+918290637199"><span
+						class="material-symbols-rounded">content_copy</span></button>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="rowicon"><span class="material-symbols-rounded">link</span></div>
+			<div class="rowbody">
+				<div class="rowlabel">LinkedIn</div>
+				<div class="rowvalue"><a href="https://www.linkedin.com/in/ramchandra95" target="_blank"
+						rel="noopener">linkedin.com/in/ramchandra95</a></div>
+			</div>
+			<div class="rowbtns">
+				<button class="iconbtn" title="Copy link" data-copy="https://www.linkedin.com/in/ramchandra95"><span
+						class="material-symbols-rounded">content_copy</span></button>
+				<button class="iconbtn" title="Open LinkedIn"
+					data-open="https://www.linkedin.com/in/ramchandra95"><span
+						class="material-symbols-rounded">open_in_new</span></button>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="rowicon"><span class="material-symbols-rounded">school</span></div>
+			<div class="rowbody">
+				<div class="rowlabel">Education</div>
+				<div class="rowvalue">B.Tech, NIT Srinagar &mdash; 2018</div>
+			</div>
+		</div>
+
+		<div class="note">
+			<b>Currently</b> leading the AI engineering team at Futureverse, building multimodal RAG and multi-agent
+			systems in production. Happy to talk about retrieval quality, evaluation, or anything at the intersection of
+			LLMs and real-time 3D.
+		</div>
+
+		<div class="cta">
+			<button class="primary" data-open="mailto:ramchandra.nitsri@gmail.com?subject=Hello%20Ram%20Chandra"><span
+					class="material-symbols-rounded">send</span>Send an email</button>
+			<button onclick="launchApp('Resume')"><span class="material-symbols-rounded">description</span>View
+				resume</button>
+		</div>
+	</main>
+
+	<script>
+		document.querySelectorAll('[data-copy]').forEach(btn => {
+			btn.addEventListener('click', async () => {
+				const value = btn.dataset.copy;
+				const icon = btn.querySelector('.material-symbols-rounded');
+				try {
+					await (window.parent.navigator.clipboard || navigator.clipboard).writeText(value);
+				} catch (err) {
+					const ta = document.createElement('textarea');
+					ta.value = value;
+					document.body.appendChild(ta);
+					ta.select();
+					try { document.execCommand('copy'); } catch (e) { }
+					ta.remove();
+				}
+				icon.textContent = 'check';
+				btn.classList.add('done');
+				setTimeout(() => {
+					icon.textContent = 'content_copy';
+					btn.classList.remove('done');
+				}, 1400);
+			});
+		});
+
+		document.querySelectorAll('[data-open]').forEach(btn => {
+			btn.addEventListener('click', () => {
+				const url = btn.dataset.open;
+				try {
+					window.parent.open(url, '_blank');
+				} catch (err) {
+					window.open(url, '_blank');
+				}
+			});
+		});
+
+		async function launchApp(name) {
+			try {
+				const file = await window.parent.getFileByPath('Apps/' + name + '.app');
+				if (file && file.id) {
+					window.parent.openfile(file.id);
+					return;
+				}
+				window.parent.openapp(name.toLowerCase(), 1);
+			} catch (err) {
+				console.error('Could not launch ' + name, err);
+			}
+		}
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Experience</title>
+	<meta name="aspect-ratio" content="16/11">
+	<meta name="theme-color" content="#101010">
+	<meta name="capabilities" content="PortfolioExperience">
+	<meta name="permissions" content="unsandboxed">
+	<meta name="nova-include" content="nova.css material-symbols-rounded">
+	<meta name="nova-icon"
+		content="<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' width='48' height='48'><rect width='48' height='48' rx='11' fill='#1f2a5e'/><path d='M18 12h12a4 4 0 0 1 4 4v3h-5v-2H19v2h-5v-3a4 4 0 0 1 4-4z' fill='#96ea6e'/><rect x='7' y='19' width='34' height='18' rx='3.5' fill='#ffffff'/><rect x='20' y='25' width='8' height='3' rx='1.5' fill='#1f2a5e'/></svg>">
+	<style>
+		html {
+			height: 100%;
+		}
+
+		body {
+			margin: 0;
+			height: 100%;
+			overflow-y: auto;
+			background: var(--col-bg1);
+			color: var(--col-txt1);
+			font-family: 'Poppins', sans-serif;
+			font-size: 15px;
+			line-height: 1.6;
+		}
+
+		main {
+			max-width: 880px;
+			margin: 0 auto;
+			padding: 1.75rem 1.5rem 2.5rem;
+		}
+
+		.pagehead {
+			margin-bottom: 1.9rem;
+		}
+
+		.pagehead h1 {
+			margin: 0;
+			font-size: 1.5rem;
+			font-weight: 800;
+			display: flex;
+			align-items: center;
+			gap: 0.55rem;
+		}
+
+		.pagehead h1 .material-symbols-rounded {
+			color: #96ea6e;
+		}
+
+		.pagehead p {
+			margin: 0.3rem 0 0;
+			color: #9a9a9a;
+			font-size: 0.87rem;
+			font-weight: 300;
+		}
+
+		/* timeline */
+		.timeline {
+			position: relative;
+			padding-left: 1.9rem;
+		}
+
+		.timeline::before {
+			content: '';
+			position: absolute;
+			left: 6px;
+			top: 8px;
+			bottom: 8px;
+			width: 2px;
+			background: linear-gradient(#6179FF, #6179ff33 70%, transparent);
+		}
+
+		.job {
+			position: relative;
+			margin-bottom: 1.6rem;
+		}
+
+		.job::before {
+			content: '';
+			position: absolute;
+			left: -1.9rem;
+			top: 0.45rem;
+			width: 14px;
+			height: 14px;
+			border-radius: 50%;
+			background: var(--col-bg1);
+			border: 3px solid #6179FF;
+		}
+
+		.job.current::before {
+			border-color: #96ea6e;
+			box-shadow: 0 0 0 4px #96ea6e26;
+		}
+
+		.jobhead {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: baseline;
+			gap: 0.5rem;
+			margin-bottom: 0.15rem;
+		}
+
+		.jobhead h2 {
+			margin: 0;
+			font-size: 1.06rem;
+			font-weight: 800;
+		}
+
+		.badge {
+			font-size: 0.66rem;
+			text-transform: uppercase;
+			letter-spacing: 0.08em;
+			font-weight: 800;
+			padding: 0.1rem 0.45rem;
+			border-radius: 999px;
+			background: #96ea6e1f;
+			color: #96ea6e;
+			border: 1px solid #96ea6e40;
+		}
+
+		.company {
+			color: #a3b1ff;
+			font-size: 0.9rem;
+			font-weight: 300;
+		}
+
+		.dates {
+			font-size: 0.78rem;
+			color: #8a8a8a;
+			font-weight: 300;
+			display: flex;
+			align-items: center;
+			gap: 0.3rem;
+			margin-bottom: 0.7rem;
+		}
+
+		.dates .material-symbols-rounded {
+			font-size: 0.9rem;
+		}
+
+		.job ul {
+			margin: 0;
+			padding-left: 1.15rem;
+			display: flex;
+			flex-direction: column;
+			gap: 0.42rem;
+		}
+
+		.job li {
+			font-size: 0.875rem;
+			color: #cfcfcf;
+			font-weight: 300;
+		}
+
+		.job li::marker {
+			color: #6179FF;
+		}
+
+		.job li b {
+			color: var(--col-txt1);
+			font-weight: 800;
+		}
+
+		.tags {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.35rem;
+			margin-top: 0.8rem;
+		}
+
+		.tag {
+			font-size: 0.72rem;
+			padding: 0.18rem 0.55rem;
+			border-radius: var(--siz-radius3);
+			background: var(--col-bg3);
+			border: var(--box-crisp);
+			color: #c9c9c9;
+		}
+
+		/* education */
+		.edu {
+			margin-top: 2.1rem;
+			padding-top: 1.5rem;
+			border-top: var(--box-crisp);
+		}
+
+		.edu h2 {
+			font-size: 0.78rem;
+			text-transform: uppercase;
+			letter-spacing: 0.14em;
+			font-weight: 800;
+			color: #8e8e8e;
+			margin: 0 0 0.8rem;
+			display: flex;
+			align-items: center;
+			gap: 0.45rem;
+		}
+
+		.edu h2 .material-symbols-rounded {
+			font-size: 1rem;
+			color: #96ea6e;
+		}
+
+		.educard {
+			background: var(--col-bg2);
+			border: var(--box-crisp);
+			border-radius: var(--siz-radius1);
+			padding: 1rem 1.1rem;
+			display: flex;
+			justify-content: space-between;
+			flex-wrap: wrap;
+			gap: 0.5rem;
+		}
+
+		.educard .deg {
+			font-weight: 800;
+			font-size: 0.95rem;
+		}
+
+		.educard .inst {
+			font-size: 0.85rem;
+			color: #a3b1ff;
+			font-weight: 300;
+		}
+
+		.educard .meta {
+			text-align: right;
+			font-size: 0.82rem;
+			color: #9a9a9a;
+			font-weight: 300;
+		}
+
+		.educard .meta .cgpa {
+			color: #96ea6e;
+			font-weight: 800;
+		}
+
+		@media (max-width: 520px) {
+			.educard .meta {
+				text-align: left;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<main>
+		<div class="pagehead">
+			<h1><span class="material-symbols-rounded">work_history</span>Professional Experience</h1>
+			<p>From Unity gameplay systems to leading an AI engineering team &mdash; four years, three companies.</p>
+		</div>
+
+		<div class="timeline">
+			<article class="job current">
+				<div class="jobhead">
+					<h2>AI/ML Lead</h2>
+					<span class="badge">Current</span>
+				</div>
+				<div class="company">Futureverse Private Limited</div>
+				<div class="dates"><span class="material-symbols-rounded">calendar_month</span>Feb 2026 &ndash; Present
+				</div>
+				<ul>
+					<li><b>Lead the AI engineering team end-to-end:</b> architecture decisions, sprint planning, code
+						reviews, and mentoring across RAG, agentic orchestration, and multi-agent system initiatives.
+					</li>
+					<li>Designed <b>agentic orchestration and multi-agent workflows</b> coordinating specialised LLM
+						agents for retrieval, reasoning, and response generation in production.</li>
+					<li>Built a <b>multimodal RAG pipeline</b> &mdash; heading-based chunking with multi-granularity
+						metadata, hybrid BM25 + vector indexing (Weaviate, bge-m3), and vision-LLM image captioning
+						embedded in the same vector space as text for unified ranked retrieval.</li>
+					<li>Fused surrounding document context into image embeddings and added LLM-based decorative-image
+						filtering, overcoming vision-model recognition limits and <b>improving retrieval precision</b>.
+					</li>
+					<li>Added <b>multi-query expansion with cross-encoder reranking</b> and relevance-threshold cutoffs
+						to eliminate off-topic and hallucinated citations.</li>
+					<li>Auto-rendered inline citations and images in the UI, backed by a <b>RAG eval suite</b> scoring
+						faithfulness, completeness, and citation accuracy.</li>
+					<li>Fixed a critical vector-DB schema bug causing silent retrieval failures, <b>restoring
+							production search reliability</b>.</li>
+				</ul>
+				<div class="tags">
+					<span class="tag">Weaviate</span><span class="tag">bge-m3</span><span class="tag">BM25</span><span
+						class="tag">Cross-Encoder Reranking</span><span class="tag">Vision LLMs</span><span
+						class="tag">Multi-Agent</span><span class="tag">RAG Eval</span>
+				</div>
+			</article>
+
+			<article class="job">
+				<div class="jobhead">
+					<h2>Team Lead &ndash; Unity, XR &amp; AI/LLM Development</h2>
+				</div>
+				<div class="company">Metamix Technologies</div>
+				<div class="dates"><span class="material-symbols-rounded">calendar_month</span>Jun 2023 &ndash; Feb 2026
+				</div>
+				<ul>
+					<li>Led Unity + AI development for medical XR products: <b>AnatomyXR, Medvisor, BirthXR,
+							LivXR</b>.</li>
+					<li>Built <b>RAG and GraphRAG pipelines</b> (OpenAI API, LangChain, Neo4j) powering AI-driven
+						medical knowledge retrieval and in-app anatomy Q&amp;A inside XR applications.</li>
+					<li>Developed an <b>LLM-based question and quiz generator</b> for AnatomyXR, auto-creating
+						assessment content grounded in the medical knowledge base via retrieval-augmented prompting.
+					</li>
+					<li>Implemented <b>AutoSchema Extraction</b> workflows to automatically generate Neo4j graph
+						schemas from unstructured medical content.</li>
+					<li>Designed modular Unity architecture using design patterns; built client-server multi-user XR
+						applications.</li>
+					<li>Optimised applications for Windows desktop, mobile, and XR devices; integrated backend SQL data
+						systems.</li>
+					<li>Collaborated with doctors, researchers, 3D modelers, and UI/UX teams across the full software
+						development lifecycle.</li>
+				</ul>
+				<div class="tags">
+					<span class="tag">LangChain</span><span class="tag">Neo4j</span><span class="tag">GraphRAG</span><span
+						class="tag">OpenAI API</span><span class="tag">Unity3D</span><span class="tag">OpenXR</span><span
+						class="tag">SQL</span>
+				</div>
+			</article>
+
+			<article class="job">
+				<div class="jobhead">
+					<h2>Unity Game &amp; Web Developer</h2>
+				</div>
+				<div class="company">Parcellinc</div>
+				<div class="dates"><span class="material-symbols-rounded">calendar_month</span>Jan 2022 &ndash; Jun 2023
+				</div>
+				<ul>
+					<li>Developed Unity-based games (<b>Zombie Runner, Realm Rush</b>) with AI-driven gameplay
+						mechanics.</li>
+					<li>Implemented <b>AI behaviour trees</b> and decision systems for enemy NPC logic and adaptive
+						difficulty.</li>
+					<li>Built <b>WebGL and Three.js</b> interactive 3D web experiences; developed cross-platform
+						Android applications.</li>
+					<li>Improved performance, resolved bugs, and optimised rendering pipelines in agile cycles with
+						designers and 3D artists.</li>
+				</ul>
+				<div class="tags">
+					<span class="tag">Unity3D</span><span class="tag">Behaviour Trees</span><span
+						class="tag">WebGL</span><span class="tag">Three.js</span><span class="tag">Android</span>
+				</div>
+			</article>
+		</div>
+
+		<div class="edu">
+			<h2><span class="material-symbols-rounded">school</span>Education</h2>
+			<div class="educard">
+				<div>
+					<div class="deg">B.Tech &ndash; Chemical Engineering</div>
+					<div class="inst">National Institute of Technology, Srinagar</div>
+				</div>
+				<div class="meta">
+					<div>2014 &ndash; 2018</div>
+					<div>CGPA: <span class="cgpa">7.41</span></div>
+				</div>
+			</div>
+		</div>
+	</main>
+</body>
+
+</html>

@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>About Me</title>
+	<meta name="aspect-ratio" content="16/11">
+	<meta name="theme-color" content="#101010">
+	<meta name="capabilities" content="PortfolioAbout">
+	<meta name="permissions" content="unsandboxed">
+	<meta name="nova-include" content="nova.css material-symbols-rounded">
+	<meta name="nova-icon"
+		content="<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' width='48' height='48'><rect width='48' height='48' rx='11' fill='#6179FF'/><circle cx='24' cy='19' r='7.5' fill='#ffffff'/><path d='M10 41c0-7.2 6.3-11.5 14-11.5S38 33.8 38 41z' fill='#ffffff'/></svg>">
+	<style>
+		html {
+			height: 100%;
+		}
+
+		body {
+			margin: 0;
+			height: 100%;
+			overflow-y: auto;
+			background: var(--col-bg1);
+			color: var(--col-txt1);
+			font-family: 'Poppins', sans-serif;
+			font-size: 15px;
+			line-height: 1.6;
+		}
+
+		main {
+			max-width: 900px;
+			margin: 0 auto;
+			padding: 1.75rem 1.5rem 2.5rem;
+		}
+
+		/* hero */
+		.hero {
+			display: flex;
+			gap: 1.4rem;
+			align-items: center;
+			padding-bottom: 1.5rem;
+			border-bottom: var(--box-crisp);
+		}
+
+		.avatar {
+			flex: 0 0 auto;
+			width: 92px;
+			height: 92px;
+			border-radius: 24px;
+			background: linear-gradient(140deg, #6179FF, #3a48a8 60%, #96ea6e);
+			display: grid;
+			place-items: center;
+			font-size: 2rem;
+			font-weight: 800;
+			letter-spacing: -1px;
+			box-shadow: 0 8px 24px #6179ff40;
+		}
+
+		.hero h1 {
+			margin: 0;
+			font-size: 1.75rem;
+			font-weight: 800;
+			line-height: 1.2;
+		}
+
+		.role {
+			margin: 0.35rem 0 0.7rem;
+			color: #a3b1ff;
+			font-size: 0.95rem;
+			font-weight: 300;
+		}
+
+		.chips {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.4rem;
+		}
+
+		.chip {
+			font-size: 0.75rem;
+			padding: 0.22rem 0.6rem;
+			border-radius: 999px;
+			background: var(--col-bg3);
+			border: var(--box-crisp);
+			display: inline-flex;
+			align-items: center;
+			gap: 0.3rem;
+		}
+
+		.chip .material-symbols-rounded {
+			font-size: 0.9rem;
+			opacity: 0.7;
+		}
+
+		/* sections */
+		section {
+			margin-top: 1.75rem;
+		}
+
+		h2 {
+			font-size: 0.78rem;
+			text-transform: uppercase;
+			letter-spacing: 0.14em;
+			font-weight: 800;
+			color: #8e8e8e;
+			margin: 0 0 0.8rem;
+			display: flex;
+			align-items: center;
+			gap: 0.45rem;
+		}
+
+		h2 .material-symbols-rounded {
+			font-size: 1rem;
+			color: #96ea6e;
+		}
+
+		.summary {
+			margin: 0;
+			font-weight: 300;
+			color: #d8d8d8;
+		}
+
+		.summary b {
+			color: var(--col-txt1);
+			font-weight: 800;
+		}
+
+		/* stats */
+		.stats {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+			gap: 0.7rem;
+		}
+
+		.stat {
+			background: var(--col-bg2);
+			border: var(--box-crisp);
+			border-radius: var(--siz-radius1);
+			padding: 0.9rem 1rem;
+		}
+
+		.stat .num {
+			font-size: 1.4rem;
+			font-weight: 800;
+			color: #96ea6e;
+			line-height: 1.1;
+		}
+
+		.stat .lbl {
+			font-size: 0.78rem;
+			color: #9a9a9a;
+			font-weight: 300;
+		}
+
+		/* focus cards */
+		.focus {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+			gap: 0.7rem;
+		}
+
+		.card {
+			background: var(--col-bg2);
+			border: var(--box-crisp);
+			border-radius: var(--siz-radius1);
+			padding: 1rem;
+		}
+
+		.card h3 {
+			margin: 0 0 0.35rem;
+			font-size: 0.95rem;
+			font-weight: 800;
+			display: flex;
+			align-items: center;
+			gap: 0.45rem;
+		}
+
+		.card h3 .material-symbols-rounded {
+			font-size: 1.15rem;
+			color: #6179FF;
+		}
+
+		.card p {
+			margin: 0;
+			font-size: 0.85rem;
+			color: #b4b4b4;
+			font-weight: 300;
+		}
+
+		/* actions */
+		.actions {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.5rem;
+			margin-top: 1.75rem;
+		}
+
+		.actions button {
+			background: var(--col-bg3);
+			color: var(--col-txt1);
+			border: var(--box-crisp);
+			border-radius: var(--siz-radius2);
+			padding: 0.55rem 0.95rem;
+			font-size: 0.85rem;
+			display: inline-flex;
+			align-items: center;
+			gap: 0.4rem;
+			transition: background var(--time1), transform var(--time1);
+		}
+
+		.actions button:hover {
+			background: var(--col-bgh);
+			transform: translateY(-1px);
+		}
+
+		.actions button.primary {
+			background: #6179FF;
+			border-color: #6179FF;
+		}
+
+		.actions button.primary:hover {
+			background: #7286ff;
+		}
+
+		.actions button .material-symbols-rounded {
+			font-size: 1.05rem;
+		}
+
+		@media (max-width: 560px) {
+			.hero {
+				flex-direction: column;
+				align-items: flex-start;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<main>
+		<div class="hero">
+			<div class="avatar">RC</div>
+			<div>
+				<h1>Ram Chandra Beniwal</h1>
+				<p class="role">AI/ML Lead &bull; LLM &amp; Agentic Systems Engineer &bull; Senior Unity3D/XR Developer
+				</p>
+				<div class="chips">
+					<span class="chip"><span class="material-symbols-rounded">work</span>AI/ML Lead @ Futureverse</span>
+					<span class="chip"><span class="material-symbols-rounded">school</span>B.Tech, NIT Srinagar</span>
+					<span class="chip"><span class="material-symbols-rounded">bolt</span>4+ years experience</span>
+				</div>
+			</div>
+		</div>
+
+		<section>
+			<h2><span class="material-symbols-rounded">person</span>Professional Summary</h2>
+			<p class="summary">
+				AI/ML Lead with <b>4+ years</b> of experience building and shipping production LLM systems: multimodal
+				RAG pipelines, agentic orchestration, multi-agent systems, and knowledge-graph-powered retrieval.
+				Currently <b>leading a full AI engineering team at Futureverse</b>, owning architecture from ingestion
+				and hybrid retrieval (BM25 + vector) through reranking, evaluation, and deployment. Deep hands-on
+				expertise in RAG, GraphRAG, AI Agents, Knowledge Graphs, embeddings, and RAG evaluation using OpenAI
+				API, LangChain, Weaviate, Neo4j, and Hugging Face. Unique background bridging intelligent AI backends
+				with real-time 3D/XR frontends for medical training and surgical visualization products.
+			</p>
+		</section>
+
+		<section>
+			<h2><span class="material-symbols-rounded">insights</span>At a glance</h2>
+			<div class="stats">
+				<div class="stat">
+					<div class="num">4+</div>
+					<div class="lbl">Years shipping production systems</div>
+				</div>
+				<div class="stat">
+					<div class="num">3</div>
+					<div class="lbl">Companies, currently leading a team</div>
+				</div>
+				<div class="stat">
+					<div class="num">4</div>
+					<div class="lbl">Medical XR products delivered</div>
+				</div>
+				<div class="stat">
+					<div class="num">2</div>
+					<div class="lbl">Worlds bridged &mdash; AI backends &amp; XR</div>
+				</div>
+			</div>
+		</section>
+
+		<section>
+			<h2><span class="material-symbols-rounded">target</span>What I focus on</h2>
+			<div class="focus">
+				<div class="card">
+					<h3><span class="material-symbols-rounded">account_tree</span>Agentic Systems</h3>
+					<p>Multi-agent orchestration where specialised LLM agents split retrieval, reasoning, and response
+						generation &mdash; running in production, not demos.</p>
+				</div>
+				<div class="card">
+					<h3><span class="material-symbols-rounded">search</span>Retrieval that holds up</h3>
+					<p>Hybrid BM25 + vector search, multi-query expansion, cross-encoder reranking, and relevance
+						thresholds that cut off-topic and hallucinated citations.</p>
+				</div>
+				<div class="card">
+					<h3><span class="material-symbols-rounded">image_search</span>Multimodal RAG</h3>
+					<p>Vision-LLM captions embedded in the same vector space as text, so images and prose rank together
+						in one unified retrieval pass.</p>
+				</div>
+				<div class="card">
+					<h3><span class="material-symbols-rounded">hub</span>Knowledge Graphs</h3>
+					<p>AutoSchema extraction turning unstructured clinical documents into Neo4j graphs for hybrid vector
+						+ graph retrieval.</p>
+				</div>
+				<div class="card">
+					<h3><span class="material-symbols-rounded">verified</span>Evaluation &amp; Reliability</h3>
+					<p>RAG eval suites scoring faithfulness, completeness, and citation accuracy &mdash; plus the
+						production debugging to keep them green.</p>
+				</div>
+				<div class="card">
+					<h3><span class="material-symbols-rounded">view_in_ar</span>Real-time 3D / XR</h3>
+					<p>Unity3D and OpenXR medical training and surgical visualisation, validated with doctors and
+						researchers.</p>
+				</div>
+			</div>
+		</section>
+
+		<div class="actions">
+			<button class="primary" onclick="launchApp('Experience')"><span
+					class="material-symbols-rounded">work_history</span>Experience</button>
+			<button onclick="launchApp('Projects')"><span class="material-symbols-rounded">layers</span>Projects</button>
+			<button onclick="launchApp('Skills')"><span class="material-symbols-rounded">bar_chart</span>Skills</button>
+			<button onclick="launchApp('Resume')"><span
+					class="material-symbols-rounded">description</span>Resume</button>
+			<button onclick="launchApp('Contact')"><span class="material-symbols-rounded">mail</span>Contact</button>
+		</div>
+	</main>
+
+	<script>
+		async function launchApp(name) {
+			try {
+				const file = await window.parent.getFileByPath('Apps/' + name + '.app');
+				if (file && file.id) {
+					window.parent.openfile(file.id);
+					return;
+				}
+				window.parent.openapp(name.toLowerCase(), 1);
+			} catch (err) {
+				console.error('Could not launch ' + name, err);
+			}
+		}
+	</script>
+</body>
+
+</html>

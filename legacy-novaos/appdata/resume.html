@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Resume</title>
+	<meta name="aspect-ratio" content="16/12">
+	<meta name="theme-color" content="#101010">
+	<meta name="capabilities" content="PortfolioResume">
+	<meta name="permissions" content="unsandboxed">
+	<meta name="nova-include" content="nova.css material-symbols-rounded">
+	<meta name="nova-icon"
+		content="<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' width='48' height='48'><rect width='48' height='48' rx='11' fill='#171717'/><path d='M14 8h13l10 10v22a3 3 0 0 1-3 3H14a3 3 0 0 1-3-3V11a3 3 0 0 1 3-3z' fill='#ffffff'/><path d='M27 8l10 10H27z' fill='#96ea6e'/><g fill='#171717'><rect x='16' y='23' width='16' height='2.6' rx='1.3'/><rect x='16' y='29' width='16' height='2.6' rx='1.3'/><rect x='16' y='35' width='10' height='2.6' rx='1.3'/></g></svg>">
+	<style>
+		html {
+			height: 100%;
+		}
+
+		body {
+			margin: 0;
+			height: 100%;
+			display: flex;
+			flex-direction: column;
+			background: var(--col-bg1);
+			color: var(--col-txt1);
+			font-family: 'Poppins', sans-serif;
+			font-size: 15px;
+			line-height: 1.55;
+		}
+
+		/* toolbar */
+		.toolbar {
+			flex: 0 0 auto;
+			display: flex;
+			align-items: center;
+			gap: 0.45rem;
+			padding: 0.6rem 0.9rem;
+			background: var(--col-bg2);
+			border-bottom: var(--box-crisp);
+		}
+
+		.toolbar .spacer {
+			flex: 1;
+		}
+
+		.toolbar button {
+			background: var(--col-bg3);
+			color: var(--col-txt1);
+			border: var(--box-crisp);
+			border-radius: var(--siz-radius2);
+			padding: 0.4rem 0.75rem;
+			font-size: 0.8rem;
+			display: inline-flex;
+			align-items: center;
+			gap: 0.35rem;
+			transition: background var(--time1);
+		}
+
+		.toolbar button:hover {
+			background: var(--col-bgh);
+		}
+
+		.toolbar button.primary {
+			background: #6179FF;
+			border-color: #6179FF;
+		}
+
+		.toolbar button.primary:hover {
+			background: #7286ff;
+		}
+
+		.toolbar button .material-symbols-rounded {
+			font-size: 1rem;
+		}
+
+		/* scroll area */
+		.scroller {
+			flex: 1;
+			overflow-y: auto;
+			padding: 1.25rem;
+		}
+
+		.sheet {
+			max-width: 820px;
+			margin: 0 auto;
+			background: var(--col-bg2);
+			border: var(--box-crisp);
+			border-radius: var(--siz-radius1);
+			padding: 2rem 2.25rem 2.5rem;
+		}
+
+		/* resume header */
+		.rhead {
+			text-align: center;
+			padding-bottom: 1rem;
+			border-bottom: 2px solid #6179FF;
+		}
+
+		.rhead h1 {
+			margin: 0;
+			font-size: 1.65rem;
+			font-weight: 800;
+			letter-spacing: -0.4px;
+		}
+
+		.rhead .tagline {
+			margin: 0.3rem 0 0.5rem;
+			font-size: 0.83rem;
+			color: #a3b1ff;
+			font-weight: 300;
+		}
+
+		.rhead .contactline {
+			font-size: 0.8rem;
+			color: #9a9a9a;
+			font-weight: 300;
+			display: flex;
+			justify-content: center;
+			flex-wrap: wrap;
+			gap: 0.25rem 0.7rem;
+		}
+
+		.rhead .contactline a {
+			color: #a3b1ff;
+			text-decoration: none;
+		}
+
+		.rhead .contactline a:hover {
+			text-decoration: underline;
+		}
+
+		/* sections */
+		.rsec {
+			margin-top: 1.4rem;
+		}
+
+		.rsec > h2 {
+			margin: 0 0 0.6rem;
+			font-size: 0.8rem;
+			text-transform: uppercase;
+			letter-spacing: 0.12em;
+			font-weight: 800;
+			color: #96ea6e;
+			padding-bottom: 0.25rem;
+			border-bottom: var(--box-crisp);
+		}
+
+		.rsec p,
+		.rsec li {
+			font-size: 0.845rem;
+			font-weight: 300;
+			color: #cfcfcf;
+		}
+
+		.rsec p {
+			margin: 0;
+		}
+
+		.rsec ul {
+			margin: 0;
+			padding-left: 1.1rem;
+			display: flex;
+			flex-direction: column;
+			gap: 0.3rem;
+		}
+
+		.rsec li::marker {
+			color: #6179FF;
+		}
+
+		.rsec b {
+			color: var(--col-txt1);
+			font-weight: 800;
+		}
+
+		/* skills lines */
+		.skillline {
+			display: flex;
+			gap: 0.45rem;
+			font-size: 0.845rem;
+			margin-bottom: 0.4rem;
+			font-weight: 300;
+			color: #cfcfcf;
+		}
+
+		.skillline .k {
+			flex: 0 0 33%;
+			font-weight: 800;
+			color: var(--col-txt1);
+		}
+
+		/* job entries */
+		.entry {
+			margin-bottom: 1.1rem;
+		}
+
+		.entry:last-child {
+			margin-bottom: 0;
+		}
+
+		.entryhead {
+			display: flex;
+			justify-content: space-between;
+			align-items: baseline;
+			gap: 0.6rem;
+			flex-wrap: wrap;
+			margin-bottom: 0.3rem;
+		}
+
+		.entryhead .who {
+			font-size: 0.92rem;
+			font-weight: 800;
+		}
+
+		.entryhead .who span {
+			color: #a3b1ff;
+			font-weight: 300;
+		}
+
+		.entryhead .when {
+			font-size: 0.78rem;
+			color: #8a8a8a;
+			white-space: nowrap;
+			font-weight: 300;
+		}
+
+		.projname {
+			font-size: 0.89rem;
+			font-weight: 800;
+			margin-bottom: 0.2rem;
+		}
+
+		.projname span {
+			color: #a3b1ff;
+			font-weight: 300;
+		}
+
+		/* ---------- paper mode ---------- */
+		body.paper {
+			background: #52525b;
+		}
+
+		body.paper .sheet {
+			background: #ffffff;
+			color: #1a1a1a;
+			border-color: transparent;
+			box-shadow: 0 10px 40px #00000073;
+		}
+
+		body.paper .rhead h1 {
+			color: #111827;
+		}
+
+		body.paper .rhead .tagline {
+			color: #3949ab;
+		}
+
+		body.paper .rhead .contactline {
+			color: #4b5563;
+		}
+
+		body.paper .rhead .contactline a {
+			color: #3949ab;
+		}
+
+		body.paper .rsec > h2 {
+			color: #1f6f3f;
+			border-bottom-color: #d1d5db;
+		}
+
+		body.paper .rsec p,
+		body.paper .rsec li,
+		body.paper .skillline {
+			color: #374151;
+		}
+
+		body.paper .rsec b,
+		body.paper .skillline .k,
+		body.paper .entryhead .who,
+		body.paper .projname {
+			color: #111827;
+		}
+
+		body.paper .entryhead .who span,
+		body.paper .projname span {
+			color: #3949ab;
+		}
+
+		body.paper .entryhead .when {
+			color: #6b7280;
+		}
+
+		body.paper .rsec li::marker {
+			color: #3949ab;
+		}
+
+		@media print {
+			.toolbar {
+				display: none;
+			}
+
+			body,
+			body.paper {
+				background: #fff;
+				height: auto;
+			}
+
+			.scroller {
+				overflow: visible;
+				padding: 0;
+			}
+
+			.sheet {
+				box-shadow: none;
+				border: 0;
+				max-width: none;
+				padding: 0;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="toolbar">
+		<button class="primary" id="dl"><span class="material-symbols-rounded">download</span>Download PDF</button>
+		<button id="openpdf"><span class="material-symbols-rounded">open_in_new</span>Open PDF</button>
+		<button id="print"><span class="material-symbols-rounded">print</span>Print</button>
+		<span class="spacer"></span>
+		<button id="toggle"><span class="material-symbols-rounded" id="toggleicon">light_mode</span><span
+				id="togglelabel">Paper view</span></button>
+	</div>
+
+	<div class="scroller">
+		<div class="sheet">
+			<div class="rhead">
+				<h1>Ram Chandra Beniwal</h1>
+				<p class="tagline">AI/ML Lead &bull; LLM &amp; Agentic Systems Engineer &bull; RAG &amp; Multi-Agent
+					Systems &bull; Senior Unity3D/XR Developer</p>
+				<div class="contactline">
+					<a href="mailto:ramchandra.nitsri@gmail.com">ramchandra.nitsri@gmail.com</a>
+					<span>&bull;</span>
+					<a href="tel:+918290637199">+91-8290637199</a>
+					<span>&bull;</span>
+					<a href="https://www.linkedin.com/in/ramchandra95" target="_blank" rel="noopener">LinkedIn</a>
+				</div>
+			</div>
+
+			<section class="rsec">
+				<h2>Professional Summary</h2>
+				<p>AI/ML Lead with <b>4+ years</b> of experience building and shipping production LLM systems:
+					multimodal RAG pipelines, agentic orchestration, multi-agent systems, and knowledge-graph-powered
+					retrieval. Currently leading a full AI engineering team at Futureverse, owning architecture from
+					ingestion and hybrid retrieval (BM25 + vector) through reranking, evaluation, and deployment. Deep
+					hands-on expertise in RAG, GraphRAG, AI Agents, Knowledge Graphs, embeddings, and RAG evaluation
+					using OpenAI API, LangChain, Weaviate, Neo4j, and Hugging Face. Unique background bridging
+					intelligent AI backends with real-time 3D/XR frontends for medical training and surgical
+					visualisation products.</p>
+			</section>
+
+			<section class="rsec">
+				<h2>Core Technical Skills</h2>
+				<div class="skillline"><span class="k">LLM &amp; Agentic Systems</span><span>RAG, Multimodal RAG,
+						GraphRAG, Agentic Orchestration, Multi-Agent Systems, AI Agents, Tool Use / Function Calling,
+						Prompt Engineering</span></div>
+				<div class="skillline"><span class="k">Retrieval &amp; Search</span><span>Hybrid BM25 + Vector Search,
+						Semantic Retrieval, Multi-Query Expansion, Cross-Encoder Reranking, Relevance Thresholding,
+						Chunking Strategies, Embedding Pipelines (bge-m3)</span></div>
+				<div class="skillline"><span class="k">Knowledge Graphs</span><span>Neo4j, AutoSchema Extraction, Hybrid
+						Vector + Graph Search</span></div>
+				<div class="skillline"><span class="k">AI Frameworks &amp; APIs</span><span>LangChain, PyTorch, Hugging
+						Face Transformers, OpenAI API, Vision LLMs (image captioning/understanding)</span></div>
+				<div class="skillline"><span class="k">Evaluation &amp; Reliability</span><span>RAG Eval Suites
+						(faithfulness, completeness, citation accuracy), Hallucination Mitigation, Production
+						Debugging</span></div>
+				<div class="skillline"><span class="k">Databases</span><span>Weaviate, Pinecone, FAISS, Neo4j,
+						SQL/MySQL</span></div>
+				<div class="skillline"><span class="k">Programming</span><span>Python, C# (Advanced), C++, JavaScript
+						(ES6+), SQL</span></div>
+				<div class="skillline"><span class="k">3D/XR</span><span>Unity3D (4+ years), OpenXR, MRTK, XR
+						Interaction Toolkit, ARCore, WebGL/Three.js</span></div>
+				<div class="skillline"><span class="k">Cloud &amp; DevOps</span><span>Docker, AWS (EC2, S3, Lambda),
+						CI/CD, Git, Linux, REST APIs</span></div>
+			</section>
+
+			<section class="rsec">
+				<h2>Professional Experience</h2>
+
+				<div class="entry">
+					<div class="entryhead">
+						<div class="who">AI/ML Lead <span>| Futureverse Private Limited</span></div>
+						<div class="when">Feb 2026 &ndash; Present</div>
+					</div>
+					<ul>
+						<li>Lead the AI engineering team end-to-end: architecture decisions, sprint planning, code
+							reviews, and mentoring across RAG, agentic orchestration, and multi-agent system
+							initiatives.</li>
+						<li>Designed agentic orchestration and multi-agent workflows coordinating specialised LLM agents
+							for retrieval, reasoning, and response generation in production.</li>
+						<li>Built a multimodal RAG pipeline &mdash; heading-based chunking with multi-granularity
+							metadata, hybrid BM25 + vector indexing (Weaviate, bge-m3), and vision-LLM image captioning
+							embedded in the same vector space as text for unified ranked retrieval.</li>
+						<li>Fused surrounding document context into image embeddings and added LLM-based
+							decorative-image filtering, overcoming vision-model recognition limits and improving
+							retrieval precision.</li>
+						<li>Added multi-query expansion with cross-encoder reranking and relevance-threshold cutoffs to
+							eliminate off-topic and hallucinated citations.</li>
+						<li>Auto-rendered inline citations and images in the UI, backed by a RAG eval suite scoring
+							faithfulness, completeness, and citation accuracy.</li>
+						<li>Fixed a critical vector-DB schema bug causing silent retrieval failures, restoring
+							production search reliability.</li>
+					</ul>
+				</div>
+
+				<div class="entry">
+					<div class="entryhead">
+						<div class="who">Team Lead &ndash; Unity, XR &amp; AI/LLM Development <span>| Metamix
+								Technologies</span></div>
+						<div class="when">Jun 2023 &ndash; Feb 2026</div>
+					</div>
+					<ul>
+						<li>Led Unity + AI development for medical XR products: AnatomyXR, Medvisor, BirthXR, LivXR.</li>
+						<li>Built RAG and GraphRAG pipelines (OpenAI API, LangChain, Neo4j) powering AI-driven medical
+							knowledge retrieval and in-app anatomy Q&amp;A inside XR applications.</li>
+						<li>Developed an LLM-based question and quiz generator for AnatomyXR, auto-creating assessment
+							content grounded in the medical knowledge base via retrieval-augmented prompting.</li>
+						<li>Implemented AutoSchema Extraction workflows to automatically generate Neo4j graph schemas
+							from unstructured medical content.</li>
+						<li>Designed modular Unity architecture using design patterns; built client-server multi-user XR
+							applications.</li>
+						<li>Optimised applications for Windows desktop, mobile, and XR devices; integrated backend SQL
+							data systems.</li>
+						<li>Collaborated with doctors, researchers, 3D modelers, and UI/UX teams across the full
+							software development lifecycle.</li>
+					</ul>
+				</div>
+
+				<div class="entry">
+					<div class="entryhead">
+						<div class="who">Unity Game &amp; Web Developer <span>| Parcellinc</span></div>
+						<div class="when">Jan 2022 &ndash; Jun 2023</div>
+					</div>
+					<ul>
+						<li>Developed Unity-based games (Zombie Runner, Realm Rush) with AI-driven gameplay mechanics.
+						</li>
+						<li>Implemented AI behaviour trees and decision systems for enemy NPC logic and adaptive
+							difficulty.</li>
+						<li>Built WebGL and Three.js interactive 3D web experiences; developed cross-platform Android
+							applications.</li>
+						<li>Improved performance, resolved bugs, and optimised rendering pipelines in agile cycles with
+							designers and 3D artists.</li>
+					</ul>
+				</div>
+			</section>
+
+			<section class="rsec">
+				<h2>Key Projects</h2>
+
+				<div class="entry">
+					<div class="projname">Multimodal Enterprise RAG Platform <span>&ndash; Futureverse</span></div>
+					<ul>
+						<li>Unified text and image search in a single vector space with hybrid BM25 + vector retrieval,
+							cross-encoder reranking, inline cited answers, and a full evaluation suite; orchestrated via
+							a multi-agent pipeline.</li>
+					</ul>
+				</div>
+
+				<div class="entry">
+					<div class="projname">AnatomyXR <span>&ndash; Immersive Anatomy Learning with AI Tutor (Meta
+							Quest)</span></div>
+					<ul>
+						<li>Built layered organ interaction and gesture-based XR modules; optimised high-poly anatomical
+							assets.</li>
+						<li>Integrated RAG pipeline with Neo4j Knowledge Graph for AI-driven anatomy Q&amp;A and an
+							automatic quiz/question generator inside the XR environment.</li>
+					</ul>
+				</div>
+
+				<div class="entry">
+					<div class="projname">Medical Knowledge Graph System <span>&ndash; AutoSchema &amp; Semantic
+							Retrieval</span></div>
+					<ul>
+						<li>Designed AutoSchema Extraction pipeline to parse and structure unstructured clinical
+							documents into Neo4j graphs, enabling hybrid vector + graph retrieval.</li>
+					</ul>
+				</div>
+
+				<div class="entry">
+					<div class="projname">Medvisor <span>&ndash; Mixed Reality Surgical AI Assistance</span></div>
+					<ul>
+						<li>Developed MR surgical visualisation and contextual simulation workflows validated with
+							medical professionals.</li>
+					</ul>
+				</div>
+			</section>
+
+			<section class="rsec">
+				<h2>Education</h2>
+				<div class="entry">
+					<div class="entryhead">
+						<div class="who">B.Tech &ndash; Chemical Engineering <span>| National Institute of Technology,
+								Srinagar</span></div>
+						<div class="when">2014 &ndash; 2018</div>
+					</div>
+					<p>CGPA: <b>7.41</b></p>
+				</div>
+			</section>
+		</div>
+	</div>
+
+	<script>
+		const PDF_NAME = 'RamChandra_Beniwal_Resume.pdf';
+
+		function pdfURL() {
+			try {
+				const base = window.parent.location.href.replace(/[?#].*$/, '').replace(/[^/]*$/, '');
+				return base + 'assets/' + PDF_NAME;
+			} catch (err) {
+				return 'assets/' + PDF_NAME;
+			}
+		}
+
+		document.getElementById('dl').onclick = () => {
+			const link = document.createElement('a');
+			link.href = pdfURL();
+			link.download = PDF_NAME;
+			document.body.appendChild(link);
+			link.click();
+			link.remove();
+		};
+
+		document.getElementById('openpdf').onclick = () => {
+			try {
+				window.parent.open(pdfURL(), '_blank');
+			} catch (err) {
+				window.open(pdfURL(), '_blank');
+			}
+		};
+
+		document.getElementById('print').onclick = () => {
+			document.body.classList.add('paper');
+			syncToggle();
+			window.print();
+		};
+
+		const toggleBtn = document.getElementById('toggle');
+		const toggleIcon = document.getElementById('toggleicon');
+		const toggleLabel = document.getElementById('togglelabel');
+
+		function syncToggle() {
+			const paper = document.body.classList.contains('paper');
+			toggleIcon.textContent = paper ? 'dark_mode' : 'light_mode';
+			toggleLabel.textContent = paper ? 'Dark view' : 'Paper view';
+		}
+
+		toggleBtn.onclick = () => {
+			document.body.classList.toggle('paper');
+			syncToggle();
+		};
+
+		syncToggle();
+	</script>
+</body>
+
+</html>

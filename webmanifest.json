@@ -1,0 +1,18 @@
+{
+	"name": "Ram Chandra Beniwal — Portfolio Desktop",
+	"short_name": "Beniwal OS",
+	"description": "Portfolio of Ram Chandra Beniwal, AI/ML Lead — presented as a desktop environment.",
+	"start_url": "./index.html",
+	"display": "standalone",
+	"orientation": "any",
+	"background_color": "#020618",
+	"theme_color": "#020618",
+	"icons": [
+		{
+			"src": "n.png",
+			"sizes": "192x192 512x512",
+			"type": "image/png",
+			"purpose": "any maskable"
+		}
+	]
+}

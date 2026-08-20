@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Projects</title>
+	<meta name="aspect-ratio" content="16/11">
+	<meta name="theme-color" content="#101010">
+	<meta name="capabilities" content="PortfolioProjects">
+	<meta name="permissions" content="unsandboxed">
+	<meta name="nova-include" content="nova.css material-symbols-rounded">
+	<meta name="nova-icon"
+		content="<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48' width='48' height='48'><rect width='48' height='48' rx='11' fill='#6179FF'/><path d='M24 8l15 8.5-15 8.5-15-8.5z' fill='#ffffff'/><path d='M24 28.2l15-8.5v4.6l-15 8.5-15-8.5v-4.6z' fill='#ced7ff'/><path d='M24 35.4l15-8.5v4.6L24 40l-15-8.5v-4.6z' fill='#96ea6e'/></svg>">
+	<style>
+		html {
+			height: 100%;
+		}
+
+		body {
+			margin: 0;
+			height: 100%;
+			overflow-y: auto;
+			background: var(--col-bg1);
+			color: var(--col-txt1);
+			font-family: 'Poppins', sans-serif;
+			font-size: 15px;
+			line-height: 1.6;
+		}
+
+		main {
+			max-width: 900px;
+			margin: 0 auto;
+			padding: 1.75rem 1.5rem 2.5rem;
+		}
+
+		.pagehead {
+			margin-bottom: 1.6rem;
+		}
+
+		.pagehead h1 {
+			margin: 0;
+			font-size: 1.5rem;
+			font-weight: 800;
+			display: flex;
+			align-items: center;
+			gap: 0.55rem;
+		}
+
+		.pagehead h1 .material-symbols-rounded {
+			color: #96ea6e;
+		}
+
+		.pagehead p {
+			margin: 0.3rem 0 0;
+			color: #9a9a9a;
+			font-size: 0.87rem;
+			font-weight: 300;
+		}
+
+		.project {
+			background: var(--col-bg2);
+			border: var(--box-crisp);
+			border-radius: var(--siz-radius1);
+			padding: 1.15rem 1.25rem;
+			margin-bottom: 0.85rem;
+			transition: border-color var(--time1), transform var(--time1);
+		}
+
+		.project:hover {
+			border-color: #6179ff59;
+			transform: translateY(-2px);
+		}
+
+		.project.featured {
+			background:
+				radial-gradient(120% 140% at 100% 0%, #6179ff1f, transparent 60%),
+				var(--col-bg2);
+			border-color: #6179ff4d;
+		}
+
+		.projhead {
+			display: flex;
+			align-items: flex-start;
+			gap: 0.75rem;
+			margin-bottom: 0.55rem;
+		}
+
+		.projicon {
+			flex: 0 0 auto;
+			width: 38px;
+			height: 38px;
+			border-radius: var(--siz-radius2);
+			display: grid;
+			place-items: center;
+			background: var(--col-bg3);
+			border: var(--box-crisp);
+		}
+
+		.projicon .material-symbols-rounded {
+			font-size: 1.25rem;
+			color: #a3b1ff;
+		}
+
+		.project.featured .projicon {
+			background: #6179ff26;
+			border-color: #6179ff59;
+		}
+
+		.titlewrap {
+			flex: 1;
+			min-width: 0;
+		}
+
+		.titlewrap h2 {
+			margin: 0;
+			font-size: 1.02rem;
+			font-weight: 800;
+			line-height: 1.35;
+		}
+
+		.subtitle {
+			font-size: 0.8rem;
+			color: #a3b1ff;
+			font-weight: 300;
+		}
+
+		.badge {
+			font-size: 0.64rem;
+			text-transform: uppercase;
+			letter-spacing: 0.08em;
+			font-weight: 800;
+			padding: 0.12rem 0.48rem;
+			border-radius: 999px;
+			background: #96ea6e1f;
+			color: #96ea6e;
+			border: 1px solid #96ea6e40;
+			white-space: nowrap;
+		}
+
+		.project ul {
+			margin: 0;
+			padding-left: 1.15rem;
+			display: flex;
+			flex-direction: column;
+			gap: 0.4rem;
+		}
+
+		.project li {
+			font-size: 0.87rem;
+			color: #cfcfcf;
+			font-weight: 300;
+		}
+
+		.project li::marker {
+			color: #6179FF;
+		}
+
+		.project li b {
+			color: var(--col-txt1);
+			font-weight: 800;
+		}
+
+		.tags {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.35rem;
+			margin-top: 0.85rem;
+		}
+
+		.tag {
+			font-size: 0.72rem;
+			padding: 0.18rem 0.55rem;
+			border-radius: var(--siz-radius3);
+			background: var(--col-bg3);
+			border: var(--box-crisp);
+			color: #c9c9c9;
+		}
+
+		/* also built */
+		.also {
+			margin-top: 1.9rem;
+			padding-top: 1.5rem;
+			border-top: var(--box-crisp);
+		}
+
+		.also h2 {
+			font-size: 0.78rem;
+			text-transform: uppercase;
+			letter-spacing: 0.14em;
+			font-weight: 800;
+			color: #8e8e8e;
+			margin: 0 0 0.85rem;
+			display: flex;
+			align-items: center;
+			gap: 0.45rem;
+		}
+
+		.also h2 .material-symbols-rounded {
+			font-size: 1rem;
+			color: #96ea6e;
+		}
+
+		.minigrid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+			gap: 0.6rem;
+		}
+
+		.mini {
+			background: var(--col-bg2);
+			border: var(--box-crisp);
+			border-radius: var(--siz-radius2);
+			padding: 0.7rem 0.85rem;
+		}
+
+		.mini .nm {
+			font-weight: 800;
+			font-size: 0.87rem;
+		}
+
+		.mini .ds {
+			font-size: 0.76rem;
+			color: #9a9a9a;
+			font-weight: 300;
+		}
+	</style>
+</head>
+
+<body>
+	<main>
+		<div class="pagehead">
+			<h1><span class="material-symbols-rounded">layers</span>Key Projects</h1>
+			<p>Production LLM systems, knowledge graphs, and immersive medical XR.</p>
+		</div>
+
+		<article class="project featured">
+			<div class="projhead">
+				<div class="projicon"><span class="material-symbols-rounded">hub</span></div>
+				<div class="titlewrap">
+					<h2>Multimodal Enterprise RAG Platform</h2>
+					<div class="subtitle">Futureverse</div>
+				</div>
+				<span class="badge">Flagship</span>
+			</div>
+			<ul>
+				<li>Unified <b>text and image search in a single vector space</b> with hybrid BM25 + vector retrieval,
+					so prose and figures compete in one ranked result set.</li>
+				<li><b>Cross-encoder reranking</b> and relevance thresholds on top of multi-query expansion, cutting
+					off-topic and hallucinated citations.</li>
+				<li>Inline cited answers rendered automatically in the UI &mdash; every claim traceable to its source
+					passage or image.</li>
+				<li>Backed by a <b>full evaluation suite</b> scoring faithfulness, completeness, and citation accuracy,
+					and orchestrated via a multi-agent pipeline.</li>
+			</ul>
+			<div class="tags">
+				<span class="tag">Weaviate</span><span class="tag">bge-m3</span><span class="tag">Hybrid BM25 +
+					Vector</span><span class="tag">Cross-Encoder</span><span class="tag">Vision LLM</span><span
+					class="tag">Multi-Agent</span><span class="tag">RAG Eval</span>
+			</div>
+		</article>
+
+		<article class="project">
+			<div class="projhead">
+				<div class="projicon"><span class="material-symbols-rounded">view_in_ar</span></div>
+				<div class="titlewrap">
+					<h2>AnatomyXR &mdash; Immersive Anatomy Learning with AI Tutor</h2>
+					<div class="subtitle">Meta Quest &bull; Metamix Technologies</div>
+				</div>
+			</div>
+			<ul>
+				<li>Built <b>layered organ interaction</b> and gesture-based XR modules; optimised high-poly anatomical
+					assets for headset frame budgets.</li>
+				<li>Integrated a <b>RAG pipeline with a Neo4j knowledge graph</b> for AI-driven anatomy Q&amp;A inside
+					the XR environment.</li>
+				<li>Shipped an <b>automatic quiz and question generator</b> grounded in the medical knowledge base via
+					retrieval-augmented prompting.</li>
+			</ul>
+			<div class="tags">
+				<span class="tag">Unity3D</span><span class="tag">Meta Quest</span><span class="tag">Neo4j</span><span
+					class="tag">LangChain</span><span class="tag">OpenAI API</span><span class="tag">OpenXR</span>
+			</div>
+		</article>
+
+		<article class="project">
+			<div class="projhead">
+				<div class="projicon"><span class="material-symbols-rounded">account_tree</span></div>
+				<div class="titlewrap">
+					<h2>Medical Knowledge Graph System</h2>
+					<div class="subtitle">AutoSchema &amp; Semantic Retrieval</div>
+				</div>
+			</div>
+			<ul>
+				<li>Designed an <b>AutoSchema Extraction pipeline</b> that parses unstructured clinical documents and
+					structures them into Neo4j graphs.</li>
+				<li>Enabled <b>hybrid vector + graph retrieval</b>, letting semantic similarity and explicit clinical
+					relationships answer the same query together.</li>
+			</ul>
+			<div class="tags">
+				<span class="tag">Neo4j</span><span class="tag">GraphRAG</span><span class="tag">AutoSchema</span><span
+					class="tag">Embeddings</span><span class="tag">Python</span>
+			</div>
+		</article>
+
+		<article class="project">
+			<div class="projhead">
+				<div class="projicon"><span class="material-symbols-rounded">healing</span></div>
+				<div class="titlewrap">
+					<h2>Medvisor &mdash; Mixed Reality Surgical AI Assistance</h2>
+					<div class="subtitle">Metamix Technologies</div>
+				</div>
+			</div>
+			<ul>
+				<li>Developed <b>MR surgical visualisation</b> and contextual simulation workflows, validated with
+					practising medical professionals.</li>
+			</ul>
+			<div class="tags">
+				<span class="tag">Mixed Reality</span><span class="tag">Unity3D</span><span class="tag">MRTK</span><span
+					class="tag">XR Interaction Toolkit</span>
+			</div>
+		</article>
+
+		<div class="also">
+			<h2><span class="material-symbols-rounded">apps</span>Also built</h2>
+			<div class="minigrid">
+				<div class="mini">
+					<div class="nm">BirthXR</div>
+					<div class="ds">Medical XR training product</div>
+				</div>
+				<div class="mini">
+					<div class="nm">LivXR</div>
+					<div class="ds">Medical XR training product</div>
+				</div>
+				<div class="mini">
+					<div class="nm">Zombie Runner</div>
+					<div class="ds">Unity game, AI-driven mechanics</div>
+				</div>
+				<div class="mini">
+					<div class="nm">Realm Rush</div>
+					<div class="ds">Unity tower defence, behaviour trees</div>
+				</div>
+			</div>
+		</div>
+	</main>
+</body>
+
+</html>

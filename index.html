@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Ram Chandra Beniwal | Portfolio</title>
+	<meta name="description"
+		content="Portfolio of Ram Chandra Beniwal — AI/ML Lead building production LLM systems: multimodal RAG, agentic orchestration, multi-agent systems, and knowledge-graph retrieval. Presented as a desktop you can use.">
+	<meta name="author" content="Ram Chandra Beniwal">
+	<meta name="theme-color" content="#020618">
+	<meta property="og:title" content="Ram Chandra Beniwal | AI/ML Lead">
+	<meta property="og:description"
+		content="A portfolio you can actually use — RAG, agentic systems, knowledge graphs, and XR, laid out as a desktop full of apps.">
+	<meta property="og:type" content="website">
+	<link rel="icon" type="image/png" href="n.png">
+	<link rel="apple-touch-icon" href="n.png">
+	<link rel="manifest" href="webmanifest.json">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+	<link rel="stylesheet" href="app/os.css">
+</head>
+
+<body data-wallpaper="nebula">
+	<!-- ================= boot ================= -->
+	<div id="boot">
+		<div class="boot-inner">
+			<div class="boot-logo">RC</div>
+			<div>
+				<div class="boot-title" id="boot-title">Ram Chandra Beniwal</div>
+				<div class="boot-sub" id="boot-sub">AI/ML Lead — portfolio desktop</div>
+			</div>
+			<div class="boot-track">
+				<div class="boot-fill" id="boot-fill"></div>
+			</div>
+			<div class="boot-log" id="boot-log">Starting up…</div>
+		</div>
+	</div>
+
+	<!-- ================= lock ================= -->
+	<div id="lock" hidden>
+		<div class="lock-inner">
+			<div class="lock-time" id="lock-time">00:00</div>
+			<div class="lock-date" id="lock-date"></div>
+			<div class="lock-avatar" id="lock-avatar">RC</div>
+			<div class="lock-name" id="lock-name">Ram Chandra Beniwal</div>
+			<div class="lock-role" id="lock-role">AI/ML Lead</div>
+			<div class="lock-hint">Click anywhere to enter</div>
+		</div>
+	</div>
+
+	<!-- ================= desktop ================= -->
+	<div id="os">
+		<div id="wallpaper"></div>
+
+		<main id="desktop">
+			<div id="desktop-icons"></div>
+
+			<aside id="desk-hero">
+				<div class="eyebrow">Portfolio · desktop edition</div>
+				<h1 id="hero-name">Ram Chandra Beniwal</h1>
+				<p id="hero-tagline">AI/ML Lead</p>
+				<div class="hero-actions">
+					<button class="btn primary" id="hero-resume">View resume</button>
+					<button class="btn" id="hero-assistant">Ask the assistant</button>
+				</div>
+			</aside>
+
+			<div id="windows"></div>
+		</main>
+
+		<!-- ================= taskbar ================= -->
+		<nav id="taskbar">
+			<div id="tb-dock">
+				<button class="tb-icon start" id="tb-start" title="Start">
+					<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+						<rect x="3" y="3" width="7" height="7" rx="1.5" />
+						<rect x="14" y="3" width="7" height="7" rx="1.5" />
+						<rect x="3" y="14" width="7" height="7" rx="1.5" />
+						<rect x="14" y="14" width="7" height="7" rx="1.5" />
+					</svg>
+				</button>
+
+				<button class="tb-icon" id="tb-search" title="Search apps">
+					<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+						<circle cx="11" cy="11" r="7" />
+						<path d="m20 20-3.6-3.6" />
+					</svg>
+				</button>
+
+				<span class="tb-sep"></span>
+
+				<div id="tb-tasks"></div>
+			</div>
+
+			<div id="tb-tray">
+				<button class="tray-btn" id="tb-notif" title="Notifications" aria-label="Notifications"
+					style="position:relative">
+					<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+						<path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6" />
+						<path d="M10 19a2 2 0 0 0 4 0" />
+					</svg>
+					<span id="notif-dot"
+						style="display:none;position:absolute;top:5px;right:5px;width:7px;height:7px;border-radius:50%;background:var(--accent)"></span>
+				</button>
+				<button class="tray-btn" title="Network" aria-label="Network">
+					<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+						<path d="M2 8.8a16 16 0 0 1 20 0" />
+						<path d="M5 12.5a11 11 0 0 1 14 0" />
+						<path d="M8.5 16a6 6 0 0 1 7 0" />
+						<circle cx="12" cy="19.4" r="0.8" />
+					</svg>
+				</button>
+				<button class="tray-btn" title="Battery" aria-label="Battery">
+					<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+						<rect x="2" y="7" width="17" height="10" rx="2" />
+						<path d="M22 11v2" />
+						<path d="M5 10h9v4H5z" fill="currentColor" stroke="none" />
+					</svg>
+				</button>
+				<button id="tb-clock">
+					<div class="time" id="clock-time">00:00</div>
+					<div class="date" id="clock-date"></div>
+				</button>
+			</div>
+		</nav>
+
+		<!-- ================= start menu ================= -->
+		<div class="panel" id="start-menu" hidden>
+			<div class="start-search">
+				<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+					<circle cx="11" cy="11" r="7" />
+					<path d="m20 20-3.6-3.6" />
+				</svg>
+				<input id="start-input" placeholder="Search apps and sections…" autocomplete="off">
+			</div>
+
+			<div>
+				<div class="section-label" style="margin-bottom:0.5rem">All apps</div>
+				<div class="start-grid" id="start-grid"></div>
+				<p class="notif-empty" id="start-empty" hidden>Nothing matches that search.</p>
+			</div>
+
+			<div class="start-foot">
+				<div class="who">
+					<span class="avatar" id="start-avatar">RC</span>
+					<span>
+						<span class="nm" id="start-name">Ram Chandra Beniwal</span><br>
+						<span class="rl" id="start-role">AI/ML Lead</span>
+					</span>
+				</div>
+				<button class="tray-btn" id="start-lock" title="Lock" aria-label="Lock">
+					<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+						<rect x="4" y="10" width="16" height="11" rx="2" />
+						<path d="M8 10V7a4 4 0 0 1 8 0v3" />
+					</svg>
+				</button>
+				<button class="tray-btn" id="start-power" title="Restart" aria-label="Restart">
+					<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+						<path d="M12 3v8" />
+						<path d="M6.5 6.5a8 8 0 1 0 11 0" />
+					</svg>
+				</button>
+			</div>
+		</div>
+
+		<!-- ================= notification centre ================= -->
+		<div class="panel" id="notif-panel" hidden>
+			<div class="notif-head">
+				<h3>Notifications</h3>
+				<button class="btn ghost" id="notif-clear">Clear all</button>
+			</div>
+			<div id="notif-list"></div>
+			<div class="section-label">Quick settings</div>
+			<div class="quick-grid">
+				<div class="quick on">
+					<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+						<path d="M2 8.8a16 16 0 0 1 20 0" />
+						<path d="M5 12.5a11 11 0 0 1 14 0" />
+						<path d="M8.5 16a6 6 0 0 1 7 0" />
+					</svg>Wi-Fi
+				</div>
+				<div class="quick on">
+					<svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+						<rect x="2" y="7" width="17" height="10" rx="2" />
+						<path d="M22 11v2" />
+					</svg>Battery 100%
+				</div>
+			</div>
+		</div>
+
+		<!-- ================= desktop context menu ================= -->
+		<div id="ctx-menu" hidden>
+			<button class="ctx-item" data-action="open" data-app="about">Open About Me</button>
+			<button class="ctx-item" data-action="open" data-app="terminal">Open Terminal</button>
+			<button class="ctx-item" data-action="open" data-app="files">Open File Explorer</button>
+			<div class="ctx-sep"></div>
+			<button class="ctx-item" data-action="wallpaper">Personalise…</button>
+			<button class="ctx-item" data-action="refresh">Refresh</button>
+		</div>
+	</div>
+
+	<div id="toasts"></div>
+
+	<noscript>
+		<div style="padding:2rem;max-width:720px;margin:0 auto;line-height:1.7">
+			<h1>Ram Chandra Beniwal</h1>
+			<h2>AI/ML Lead · LLM &amp; Agentic Systems Engineer</h2>
+			<p>This portfolio runs as a small desktop environment in your browser, so it needs JavaScript. The short
+				version:</p>
+			<p>AI/ML Lead with 4+ years building and shipping production LLM systems — multimodal RAG pipelines, agentic
+				orchestration, multi-agent systems, and knowledge-graph-powered retrieval. Currently leading the AI
+				engineering team at Futureverse. Previously led Unity, XR and AI/LLM development for medical XR products
+				at Metamix Technologies.</p>
+			<p>
+				Email: <a href="mailto:ramchandra.nitsri@gmail.com">ramchandra.nitsri@gmail.com</a> ·
+				Phone: +91-8290637199 ·
+				<a href="https://www.linkedin.com/in/ramchandra95">LinkedIn</a> ·
+				<a href="assets/RamChandra_Beniwal_Resume.pdf">Download resume (PDF)</a>
+			</p>
+		</div>
+	</noscript>
+
+	<script src="app/icons.js"></script>
+	<script src="app/data.js"></script>
+	<script src="app/apps.js"></script>
+	<script src="app/os.js"></script>
+</body>
+
+</html>

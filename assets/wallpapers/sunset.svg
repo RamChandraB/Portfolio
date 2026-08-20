@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+	<defs>
+		<linearGradient id="ssky" x1="0" y1="0" x2="0" y2="1">
+			<stop offset="0" stop-color="#1b1436" />
+			<stop offset="0.35" stop-color="#6b2b52" />
+			<stop offset="0.62" stop-color="#d95f3c" />
+			<stop offset="0.78" stop-color="#f7a55b" />
+			<stop offset="1" stop-color="#2a1330" />
+		</linearGradient>
+		<radialGradient id="ssun" cx="0.5" cy="0.5" r="0.5">
+			<stop offset="0" stop-color="#fff3c4" />
+			<stop offset="0.55" stop-color="#ffcf6b" />
+			<stop offset="1" stop-color="#ff8a3d" stop-opacity="0" />
+		</radialGradient>
+		<linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+			<stop offset="0" stop-color="#8e3f43" />
+			<stop offset="0.5" stop-color="#3a1a35" />
+			<stop offset="1" stop-color="#150a1c" />
+		</linearGradient>
+		<filter id="sblur" x="-50%" y="-50%" width="200%" height="200%">
+			<feGaussianBlur stdDeviation="26" />
+		</filter>
+	</defs>
+
+	<rect width="1600" height="900" fill="url(#ssky)" />
+
+	<!-- clouds -->
+	<g fill="#2c1233" opacity="0.55" filter="url(#sblur)">
+		<ellipse cx="300" cy="180" rx="260" ry="34" />
+		<ellipse cx="1150" cy="130" rx="320" ry="28" />
+		<ellipse cx="780" cy="250" rx="380" ry="26" />
+		<ellipse cx="1420" cy="300" rx="240" ry="22" />
+	</g>
+
+	<!-- sun -->
+	<circle cx="800" cy="520" r="230" fill="url(#ssun)" />
+	<circle cx="800" cy="520" r="96" fill="#fff6d2" />
+
+	<!-- sea -->
+	<rect x="0" y="540" width="1600" height="360" fill="url(#sea)" />
+	<g fill="#ffd08a" opacity="0.5">
+		<rect x="770" y="560" width="60" height="6" rx="3" />
+		<rect x="740" y="586" width="120" height="6" rx="3" />
+		<rect x="700" y="618" width="200" height="7" rx="3" />
+		<rect x="660" y="658" width="280" height="7" rx="3" />
+		<rect x="600" y="706" width="400" height="8" rx="4" />
+		<rect x="540" y="762" width="520" height="8" rx="4" />
+		<rect x="470" y="826" width="660" height="9" rx="4" />
+	</g>
+
+	<!-- foreground headland -->
+	<path d="M0 620 C 180 590 300 640 420 700 C 250 720 100 780 0 860 Z" fill="#120817" />
+	<path d="M1600 600 C 1420 590 1280 650 1180 720 C 1360 740 1500 800 1600 880 Z" fill="#140a1a" />
+	<rect x="0" y="0" width="1600" height="900" fill="#160a20" opacity="0.12" />
+</svg>
